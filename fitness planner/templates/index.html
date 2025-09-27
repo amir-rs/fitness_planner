@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامه مشاوره ورزشی و تغذیه</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body { font-family: 'Vazirmatn', Tahoma, sans-serif; background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); min-height: 100vh; }
+        .main-card { border-radius: 24px; box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15); background: #fff; overflow: hidden; }
+        .gradient-header { background: linear-gradient(90deg, #0d6efd 0%, #38b6ff 100%); color: #fff; border-bottom: none; }
+        .header-img { width: 90px; height: 90px; object-fit: contain; margin-bottom: 1rem; }
+        .form-label { font-weight: bold; color: #0d6efd; }
+        .form-control, .form-select { border-radius: 12px; }
+        .btn-primary { border-radius: 12px; font-weight: bold; font-size: 1.1rem; padding: 0.75rem 2.5rem; }
+        .main-illustration { width: 100%; max-width: 350px; margin: 0 auto 2rem auto; display: block; }
+        .footer { text-align: center; color: #888; margin-top: 2rem; font-size: 0.95rem; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+    </style>
+</head>
+<body>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 animate__animated animate__fadeInUp">
+            <div class="main-card shadow-lg">
+                <div class="card-header gradient-header text-center py-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" class="header-img animate__animated animate__pulse animate__infinite" alt="logo">
+                    <h1 class="mb-0">برنامه مشاوره ورزشی و تغذیه</h1>
+                </div>
+                <div class="card-body p-4">
+                    <img src="https://cdn.pixabay.com/photo/2017/01/31/13/14/athlete-2029275_1280.png" class="main-illustration animate__animated animate__fadeIn" alt="">
+                    <form method="post" class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">قد (سانتی‌متر)</label>
+                            <input type="number" name="height" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">وزن (کیلوگرم)</label>
+                            <input type="number" name="weight" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">سن</label>
+                            <input type="number" name="age" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">جنسیت</label>
+                            <select name="gender" class="form-select" required>
+                                <option value="مرد">مرد</option>
+                                <option value="زن">زن</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">هدف</label>
+                            <select name="goal" class="form-select" required>
+                                <option value="کاهش وزن">کاهش وزن</option>
+                                <option value="افزایش وزن">افزایش وزن</option>
+                                <option value="پیشنهاد هوش مصنوعی">پیشنهاد هوش مصنوعی</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">سطح فعالیت بدنی</label>
+                            <select name="activity_level" class="form-select" required>
+                                <option value="کم">کم</option>
+                                <option value="متوسط">متوسط</option>
+                                <option value="زیاد">زیاد</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">تعداد روز ورزش در هفته</label>
+                            <select name="workout_days" class="form-select" required>
+                                <option value="3">۳ روز</option>
+                                <option value="4">۴ روز</option>
+                                <option value="5">۵ روز</option>
+                                <option value="6">۶ روز</option>
+                                <option value="7">۷ روز</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">نوع برنامه مورد نیاز</label>
+                            <select name="plan_type" class="form-select" required>
+                                <option value="both">برنامه تمرینی و رژیم غذایی</option>
+                                <option value="workout">فقط برنامه تمرینی</option>
+                                <option value="diet">فقط رژیم غذایی</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">ملاحظات ورزشی (آسیب، محدودیت و ...)</label>
+                            <input type="text" name="sport_notes" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">ملاحظات غذایی (آلرژی، رژیم خاص و ...)</label>
+                            <input type="text" name="diet_notes" class="form-control">
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label">توضیحات اضافی</label>
+                            <textarea name="extra" class="form-control" rows="2"></textarea>
+                        </div>
+                        <div class="col-12 text-center mt-3">
+                            <button type="submit" class="btn btn-primary animate__animated animate__pulse animate__infinite">دریافت برنامه</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="footer mt-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" width="32" style="vertical-align: middle;">&nbsp;
+                <span>طراحی شده با عشق برای سلامتی شما</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html> 

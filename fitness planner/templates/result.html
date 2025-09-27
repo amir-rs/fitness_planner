@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتایج برنامه مشاوره</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body { font-family: 'Vazirmatn', Tahoma, sans-serif; background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); min-height: 100vh; }
+        .main-card { border-radius: 24px; box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15); background: #fff; overflow: hidden; }
+        .ai-section-box {
+            background: linear-gradient(90deg, #f8f9fa 60%, #e3f0ff 100%);
+            border: none;
+            border-radius: 32px;
+            margin-bottom: 2.5rem;
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            direction: rtl;
+            text-align: right;
+            box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+            animation: fadeInUp 1s;
+            width: 100%;
+            max-width: 98vw;
+            min-width: 0;
+            position: relative;
+        }
+        .ai-section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.2rem;
+        }
+        .ai-section-header img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+        section h4 {
+            color: #0d6efd;
+            margin-bottom: 0;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 1.35rem;
+        }
+        table { direction: rtl; font-size: 1rem; }
+        .header-img { width: 80px; height: 80px; object-fit: contain; margin-bottom: 1rem; }
+        .gradient-header { background: linear-gradient(90deg, #0d6efd 0%, #38b6ff 100%); color: #fff; border-bottom: none; }
+        .btn-primary, .btn-outline-primary { border-radius: 12px; font-weight: bold; }
+        .info-list li { margin-bottom: 0.5rem; }
+        .footer { text-align: center; color: #888; margin-top: 2rem; font-size: 0.95rem; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+        @media (min-width: 992px) {
+            .ai-section-box { padding: 2.5rem 4rem 2rem 4rem; }
+        }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.ai-section-box table').forEach(function(tbl) {
+            tbl.classList.add('table', 'table-striped', 'table-bordered', 'align-middle', 'text-center');
+        });
+    });
+    </script>
+</head>
+<body>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-11 animate__animated animate__fadeInUp">
+            <div class="main-card shadow-lg">
+                <div class="card-header gradient-header text-center py-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" class="header-img animate__animated animate__pulse animate__infinite" alt="logo">
+                    <h2 class="mb-0">نتایج برنامه مشاوره ورزشی و تغذیه</h2>
+                </div>
+                <div class="card-body p-4">
+                    <h5 class="mb-3">اطلاعات وارد شده:</h5>
+                    <ul class="info-list">
+                        <li>قد: {{ user_data.height }} سانتی‌متر</li>
+                        <li>وزن: {{ user_data.weight }} کیلوگرم</li>
+                        <li>سن: {{ user_data.age }}</li>
+                        <li>جنسیت: {{ user_data.gender }}</li>
+                        <li>هدف: {{ user_data.goal }}</li>
+                        <li>سطح فعالیت بدنی: {{ user_data.activity_level }}</li>
+                        <li>تعداد روز ورزش در هفته: {{ user_data.workout_days }}</li>
+                        <li>ملاحظات ورزشی: {{ user_data.sport_notes }}</li>
+                        <li>ملاحظات غذایی: {{ user_data.diet_notes }}</li>
+                        <li>توضیحات اضافی: {{ user_data.extra }}</li>
+                    </ul>
+                    <hr>
+                    <h5 class="mb-3">پاسخ هوش مصنوعی:</h5>
+                    {% if error %}
+                        <div class="alert alert-danger">خطا در دریافت پاسخ: {{ error }}</div>
+                    {% else %}
+                        {% if sections and sections|length > 0 %}
+                            {% for section in sections %}
+                                {% set section_title = '' %}
+                                {% if 'برنامه تمرینی' in section %}
+                                    {% set section_title = 'برنامه تمرینی' %}
+                                    {% set section_icon = 'https://cdn-icons-png.flaticon.com/512/1048/1048927.png' %}
+                                {% elif 'برنامه غذایی' in section %}
+                                    {% set section_title = 'برنامه غذایی' %}
+                                    {% set section_icon = 'https://cdn-icons-png.flaticon.com/512/1048/1048932.png' %}
+                                {% elif 'تحلیل و بررسی' in section or 'BMI' in section %}
+                                    {% set section_title = 'تحلیل و بررسی وضعیت بدنی' %}
+                                    {% set section_icon = 'https://cdn-icons-png.flaticon.com/512/1048/1048947.png' %}
+                                {% endif %}
+                                <div class="ai-section-box animate__animated animate__fadeInUp">
+                                    <div class="ai-section-header">
+                                        <img src="{{ section_icon }}" alt="icon">
+                                        <span><strong>{{ section_title }}</strong></span>
+                                    </div>
+                                    {{ section|safe }}
+                                </div>
+                            {% endfor %}
+                        {% elif ai_response %}
+                            <div class="ai-section-box animate__animated animate__fadeInUp">{{ ai_response|safe }}</div>
+                        {% endif %}
+                        {% if plan_type == 'workout' %}
+                            <div class="text-center mt-3">
+                                <form method="post">
+                                    {% for key, value in user_data.items() %}
+                                        {% if key != 'plan_type' %}
+                                            <input type="hidden" name="{{ key }}" value="{{ value }}">
+                                        {% endif %}
+                                    {% endfor %}
+                                    <input type="hidden" name="plan_type" value="diet_only">
+                                    <button type="submit" class="btn btn-outline-primary">دریافت فقط رژیم غذایی</button>
+                                </form>
+                            </div>
+                        {% elif plan_type == 'diet' %}
+                            <div class="text-center mt-3">
+                                <form method="post">
+                                    {% for key, value in user_data.items() %}
+                                        {% if key != 'plan_type' %}
+                                            <input type="hidden" name="{{ key }}" value="{{ value }}">
+                                        {% endif %}
+                                    {% endfor %}
+                                    <input type="hidden" name="plan_type" value="workout_only">
+                                    <button type="submit" class="btn btn-outline-primary">دریافت فقط برنامه تمرینی</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    <div class="mt-4 text-center">
+                        <a href="/" class="btn btn-primary px-4 py-2">بازگشت به صفحه اصلی</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer mt-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" width="32" style="vertical-align: middle;">&nbsp;
+                <span>طراحی شده با عشق برای سلامتی شما</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
